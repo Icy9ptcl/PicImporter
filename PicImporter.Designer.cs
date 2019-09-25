@@ -31,7 +31,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.FromBox = new System.Windows.Forms.GroupBox();
 			this.SearchDCIMButton = new System.Windows.Forms.Button();
-			this.label6 = new System.Windows.Forms.Label();
+			this.DriveInfoLabel = new System.Windows.Forms.Label();
 			this.FromFolderLabel = new System.Windows.Forms.Label();
 			this.FromDriveSel = new System.Windows.Forms.ComboBox();
 			this.SearchDrvButton = new System.Windows.Forms.Button();
@@ -80,7 +80,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FromBox.AutoSize = true;
 			this.FromBox.Controls.Add(this.SearchDCIMButton);
-			this.FromBox.Controls.Add(this.label6);
+			this.FromBox.Controls.Add(this.DriveInfoLabel);
 			this.FromBox.Controls.Add(this.FromFolderLabel);
 			this.FromBox.Controls.Add(this.FromDriveSel);
 			this.FromBox.Controls.Add(this.SearchDrvButton);
@@ -102,16 +102,17 @@
 			this.SearchDCIMButton.TabIndex = 9;
 			this.SearchDCIMButton.Text = "DCIMフォルダ検索";
 			this.SearchDCIMButton.UseVisualStyleBackColor = true;
+			this.SearchDCIMButton.Click += new System.EventHandler(this.SearchDCIMButton_Click);
 			// 
-			// label6
+			// DriveInfoLabel
 			// 
-			this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.label6.Location = new System.Drawing.Point(3, 101);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(504, 18);
-			this.label6.TabIndex = 8;
-			this.label6.Text = "- ここに情報が表示されます -";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.DriveInfoLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.DriveInfoLabel.Location = new System.Drawing.Point(3, 101);
+			this.DriveInfoLabel.Name = "DriveInfoLabel";
+			this.DriveInfoLabel.Size = new System.Drawing.Size(504, 18);
+			this.DriveInfoLabel.TabIndex = 8;
+			this.DriveInfoLabel.Text = "- ここに情報が表示されます -";
+			this.DriveInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// FromFolderLabel
 			// 
@@ -124,6 +125,7 @@
 			// 
 			// FromDriveSel
 			// 
+			this.FromDriveSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FromDriveSel.FormattingEnabled = true;
 			this.FromDriveSel.Location = new System.Drawing.Point(9, 43);
 			this.FromDriveSel.Name = "FromDriveSel";
@@ -139,6 +141,7 @@
 			this.SearchDrvButton.TabIndex = 5;
 			this.SearchDrvButton.Text = "ドライブ再検索";
 			this.SearchDrvButton.UseVisualStyleBackColor = true;
+			this.SearchDrvButton.Click += new System.EventHandler(this.SearchDrvButton_Click);
 			// 
 			// FromFolderTB
 			// 
@@ -407,7 +410,7 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.Label FromFolderLabel;
-		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label DriveInfoLabel;
 		private System.Windows.Forms.GroupBox DestBox;
 		private System.Windows.Forms.Button AutoFolderConfigB;
 		private System.Windows.Forms.ComboBox AutoFolderPulldown;
