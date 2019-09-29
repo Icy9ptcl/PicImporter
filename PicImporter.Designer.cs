@@ -289,6 +289,7 @@
 			this.DestSelBtn.TabIndex = 10;
 			this.DestSelBtn.Text = "参照";
 			this.DestSelBtn.UseVisualStyleBackColor = true;
+			this.DestSelBtn.Click += new System.EventHandler(this.DestSelBtn_Click);
 			// 
 			// FolderSelLabel
 			// 

@@ -202,8 +202,9 @@ namespace PicImporter {
 					typeof(AutoCreateMode),
 					AutoCreateFolderPulldown.SelectedIndex
 				);
+			AutoCreateFolder_PreviewLabel.Text = "自動設定しています...";
 			string ErrorMsg = null;
-			Task<string> t = Task.Factory.StartNew<string>(() => {
+			Task<string> SearchTask = Task.Factory.StartNew<string>(() => {
 				try {
 					int Time = System.Environment.TickCount;
 					string Name = AutoCreateFolder_GetName(FromFolderTB.Text, Mode);
@@ -211,11 +212,16 @@ namespace PicImporter {
 					return Name;
 				} catch (Exception exp) {
 					Console.WriteLine("Search failed.");
-					ErrorMsg = exp.Message;
+					Console.WriteLine(String.Format("{0} : {1}\n{2}",exp.ToString(),exp.Message,exp.StackTrace));
+					if (exp.Message != "") {
+						ErrorMsg = exp.Message;
+					} else {
+						ErrorMsg = exp.ToString();
+					}
 					return null;
 				}
 			});
-			string Path = await t;
+			string Path = await SearchTask;
 			if (Path != null) {
 				AutoCreateFolder_PreviewLabel.Visible = true;
 				AutoCreateFolder_PreviewLabel.Enabled = true;
@@ -223,31 +229,117 @@ namespace PicImporter {
 			} else {
 				AutoCreateFolder_PreviewLabel.Visible = true;
 				AutoCreateFolder_PreviewLabel.Enabled = true;
-				AutoCreateFolder_PreviewLabel.Text = "フォルダ名が生成できません ("+ErrorMsg+")";
+				if (ErrorMsg != null) {
+					AutoCreateFolder_PreviewLabel.Text = "自動設定できません";
+				} else {
+					AutoCreateFolder_PreviewLabel.Text = "自動設定できません( " + ErrorMsg + " )";
+				}
 			}
 			//t.Wait();
 		}
 
-		private string AutoCreateFolder_GetName(string Path, AutoCreateMode Mode) {
-			string FolderName = null;
-			switch (Mode) {
-				case AutoCreateMode.NewestFile: {
-					Console.WriteLine(Path);
-					if (!System.IO.Directory.Exists(Path)) {
-						throw new FileNotFoundException("フォルダ " + Path + " が見つからないか、アクセスできません。");
+		string AutoCreateFolder_GetName(string Path, AutoCreateMode Mode) {
+			if (!System.IO.Directory.Exists(Path)) {
+				throw new FileNotFoundException("フォルダ " + Path + " が見つからないか、アクセスできません。");
+			}
+			string MatchFileName = LookForFile(Path, Mode, 5);
+			string DesignedName = null; //フォルダの名前
+			if (MatchFileName != null) {
+				switch (Mode) {
+					case AutoCreateMode.NewestFile:
+					case AutoCreateMode.OldestFile: {
+						DesignedName = File.GetLastWriteTime(MatchFileName).ToString("yyyy-MM-dd");
 						break;
 					}
-					System.IO.Directory.GetDirectories(Path, "*", SearchOption.TopDirectoryOnly);
-					System.Threading.Thread.Sleep(5000);
-					break;
+				}
+			} 
+			return DesignedName;
+
+			string LookForFile(string FromPath, AutoCreateMode SchMode, int Depth, object SchData = null) {
+
+				var Files = System.IO.Directory.GetFiles(FromPath);
+				string Result = null;
+
+				if (SchData == null) { //一番最初の検索
+					switch (SchMode) {
+						case AutoCreateMode.NewestFile: {
+							SchData = (object)DateTime.MinValue;
+							break;
+						}
+						case AutoCreateMode.OldestFile: {
+							SchData = (object)DateTime.MaxValue;
+							break;
+						}
+					}
 				}
 
+				//処理状況
+				//Console.WriteLine(String.Format("{0} -- {1}", FromPath, ( (DateTime)SchData ).ToString()));
+
+				foreach (var FileName in Files) {
+					switch (SchMode) {
+						case AutoCreateMode.NewestFile: {
+							var FileT = File.GetLastWriteTime(FileName);
+							var CompT = (DateTime)SchData;
+							if (FileT > CompT) {
+								SchData = (object)FileT;
+								Result = FileName;
+							}
+							break;
+						}
+
+						case AutoCreateMode.OldestFile: {
+							var FileT = File.GetLastWriteTime(FileName);
+							var CompT = (DateTime)SchData;
+							if (FileT < CompT) {
+								SchData = (object)FileT;
+								Result = FileName;
+							}
+							break;
+						}
+					}
+				}
+
+				if (Depth > 1) {
+					var Folders = System.IO.Directory.GetDirectories(FromPath);
+					foreach (var FolderName in Folders) {
+						string MatchPath = LookForFile(FolderName, SchMode, Depth - 1,SchData);
+						if (MatchPath != null) {
+							switch (SchMode) {
+								case AutoCreateMode.NewestFile: {
+									var FileT = File.GetLastWriteTime(MatchPath);
+									var CompT = (DateTime)SchData;
+									if (FileT > CompT) {
+										SchData = (object)FileT;
+										Result = MatchPath;
+									}
+									break;
+								}
+
+								case AutoCreateMode.OldestFile: {
+									var FileT = File.GetLastWriteTime(MatchPath);
+									var CompT = (DateTime)SchData;
+									if (FileT < CompT) {
+										SchData = (object)FileT;
+										Result = MatchPath;
+									}
+									break;
+								}
+							}
+						}
+					}
+				}
+				return Result;
 			}
-			return FolderName;
 		}
 
+		//Console.WriteLine(Path);
 		private void AutoCreateFolderCheckbox_CheckedChanged(object sender, EventArgs e) {
 			AutoCreateFolderPulldown.Enabled = AutoCreateFolderCheckbox.Checked;
+		}
+
+		private void DestSelBtn_Click(object sender, EventArgs e) {
+			DestSelDialog.ShowDialog();
 		}
 	}
 }
