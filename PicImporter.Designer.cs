@@ -30,6 +30,7 @@
 		{
 			this.label1 = new System.Windows.Forms.Label();
 			this.FromBox = new System.Windows.Forms.GroupBox();
+			this.FromSelBtn = new System.Windows.Forms.Button();
 			this.SearchDCIMButton = new System.Windows.Forms.Button();
 			this.DriveInfoLabel = new System.Windows.Forms.Label();
 			this.FromFolderLabel = new System.Windows.Forms.Label();
@@ -45,17 +46,21 @@
 			this.FilterCheckButton = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.DestBox = new System.Windows.Forms.GroupBox();
+			this.AutoCreateFolder_PreviewLabel = new System.Windows.Forms.Label();
+			this.DestSelBtn = new System.Windows.Forms.Button();
 			this.FolderSelLabel = new System.Windows.Forms.Label();
-			this.AutoFolderCheckbox = new System.Windows.Forms.CheckBox();
+			this.AutoCreateFolderCheckbox = new System.Windows.Forms.CheckBox();
 			this.checkBox3 = new System.Windows.Forms.CheckBox();
 			this.AutoFolderConfigB = new System.Windows.Forms.Button();
-			this.AutoFolderPulldown = new System.Windows.Forms.ComboBox();
+			this.AutoCreateFolderPulldown = new System.Windows.Forms.ComboBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.FolderselPulldown = new System.Windows.Forms.ComboBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.DestfolderLabel = new System.Windows.Forms.Label();
+			this.DestFolderPulldown = new System.Windows.Forms.ComboBox();
+			this.DestFolderTB = new System.Windows.Forms.TextBox();
+			this.DestFolderLabel = new System.Windows.Forms.Label();
 			this.MainFLP = new System.Windows.Forms.FlowLayoutPanel();
 			this.StartButton = new System.Windows.Forms.Button();
+			this.FromSelDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.DestSelDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.FromBox.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.FilterPanel.SuspendLayout();
@@ -79,6 +84,7 @@
 			this.FromBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FromBox.AutoSize = true;
+			this.FromBox.Controls.Add(this.FromSelBtn);
 			this.FromBox.Controls.Add(this.SearchDCIMButton);
 			this.FromBox.Controls.Add(this.DriveInfoLabel);
 			this.FromBox.Controls.Add(this.FromFolderLabel);
@@ -93,6 +99,16 @@
 			this.FromBox.TabIndex = 3;
 			this.FromBox.TabStop = false;
 			this.FromBox.Text = "取り込み元の設定";
+			// 
+			// FromSelBtn
+			// 
+			this.FromSelBtn.Location = new System.Drawing.Point(452, 74);
+			this.FromSelBtn.Name = "FromSelBtn";
+			this.FromSelBtn.Size = new System.Drawing.Size(52, 23);
+			this.FromSelBtn.TabIndex = 10;
+			this.FromSelBtn.Text = "参照";
+			this.FromSelBtn.UseVisualStyleBackColor = true;
+			this.FromSelBtn.Click += new System.EventHandler(this.FromDriveSelBtn_Click);
 			// 
 			// SearchDCIMButton
 			// 
@@ -147,7 +163,7 @@
 			// 
 			this.FromFolderTB.Location = new System.Drawing.Point(128, 73);
 			this.FromFolderTB.Name = "FromFolderTB";
-			this.FromFolderTB.Size = new System.Drawing.Size(376, 25);
+			this.FromFolderTB.Size = new System.Drawing.Size(321, 25);
 			this.FromFolderTB.TabIndex = 4;
 			this.FromFolderTB.Text = "Path";
 			// 
@@ -166,7 +182,7 @@
 			this.groupBox2.Controls.Add(this.FilterPanel);
 			this.groupBox2.Controls.Add(this.FilterCheckButton);
 			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Location = new System.Drawing.Point(3, 295);
+			this.groupBox2.Location = new System.Drawing.Point(3, 336);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(529, 115);
 			this.groupBox2.TabIndex = 6;
@@ -236,45 +252,68 @@
 			// DestBox
 			// 
 			this.DestBox.AutoSize = true;
+			this.DestBox.Controls.Add(this.AutoCreateFolder_PreviewLabel);
+			this.DestBox.Controls.Add(this.DestSelBtn);
 			this.DestBox.Controls.Add(this.FolderSelLabel);
-			this.DestBox.Controls.Add(this.AutoFolderCheckbox);
+			this.DestBox.Controls.Add(this.AutoCreateFolderCheckbox);
 			this.DestBox.Controls.Add(this.checkBox3);
 			this.DestBox.Controls.Add(this.AutoFolderConfigB);
-			this.DestBox.Controls.Add(this.AutoFolderPulldown);
+			this.DestBox.Controls.Add(this.AutoCreateFolderPulldown);
 			this.DestBox.Controls.Add(this.checkBox2);
-			this.DestBox.Controls.Add(this.FolderselPulldown);
-			this.DestBox.Controls.Add(this.textBox2);
-			this.DestBox.Controls.Add(this.DestfolderLabel);
+			this.DestBox.Controls.Add(this.DestFolderPulldown);
+			this.DestBox.Controls.Add(this.DestFolderTB);
+			this.DestBox.Controls.Add(this.DestFolderLabel);
 			this.DestBox.Location = new System.Drawing.Point(3, 137);
 			this.DestBox.Name = "DestBox";
-			this.DestBox.Size = new System.Drawing.Size(545, 152);
+			this.DestBox.Size = new System.Drawing.Size(545, 193);
 			this.DestBox.TabIndex = 7;
 			this.DestBox.TabStop = false;
 			this.DestBox.Text = "保存先の設定";
 			// 
+			// AutoCreateFolder_PreviewLabel
+			// 
+			this.AutoCreateFolder_PreviewLabel.AutoSize = true;
+			this.AutoCreateFolder_PreviewLabel.Enabled = false;
+			this.AutoCreateFolder_PreviewLabel.Location = new System.Drawing.Point(9, 115);
+			this.AutoCreateFolder_PreviewLabel.Name = "AutoCreateFolder_PreviewLabel";
+			this.AutoCreateFolder_PreviewLabel.Size = new System.Drawing.Size(92, 18);
+			this.AutoCreateFolder_PreviewLabel.TabIndex = 11;
+			this.AutoCreateFolder_PreviewLabel.Text = "フォルダ名: ---";
+			this.AutoCreateFolder_PreviewLabel.Visible = false;
+			// 
+			// DestSelBtn
+			// 
+			this.DestSelBtn.Location = new System.Drawing.Point(490, 17);
+			this.DestSelBtn.Name = "DestSelBtn";
+			this.DestSelBtn.Size = new System.Drawing.Size(49, 23);
+			this.DestSelBtn.TabIndex = 10;
+			this.DestSelBtn.Text = "参照";
+			this.DestSelBtn.UseVisualStyleBackColor = true;
+			// 
 			// FolderSelLabel
 			// 
 			this.FolderSelLabel.AutoSize = true;
-			this.FolderSelLabel.Location = new System.Drawing.Point(269, 47);
+			this.FolderSelLabel.Location = new System.Drawing.Point(269, 51);
 			this.FolderSelLabel.Name = "FolderSelLabel";
 			this.FolderSelLabel.Size = new System.Drawing.Size(92, 18);
 			this.FolderSelLabel.TabIndex = 9;
 			this.FolderSelLabel.Text = "フォルダ指定→";
 			// 
-			// AutoFolderCheckbox
+			// AutoCreateFolderCheckbox
 			// 
-			this.AutoFolderCheckbox.AutoSize = true;
-			this.AutoFolderCheckbox.Location = new System.Drawing.Point(9, 76);
-			this.AutoFolderCheckbox.Name = "AutoFolderCheckbox";
-			this.AutoFolderCheckbox.Size = new System.Drawing.Size(159, 22);
-			this.AutoFolderCheckbox.TabIndex = 8;
-			this.AutoFolderCheckbox.Text = "フォルダを自動作成する";
-			this.AutoFolderCheckbox.UseVisualStyleBackColor = true;
+			this.AutoCreateFolderCheckbox.AutoSize = true;
+			this.AutoCreateFolderCheckbox.Location = new System.Drawing.Point(9, 81);
+			this.AutoCreateFolderCheckbox.Name = "AutoCreateFolderCheckbox";
+			this.AutoCreateFolderCheckbox.Size = new System.Drawing.Size(159, 22);
+			this.AutoCreateFolderCheckbox.TabIndex = 8;
+			this.AutoCreateFolderCheckbox.Text = "フォルダを自動作成する";
+			this.AutoCreateFolderCheckbox.UseVisualStyleBackColor = true;
+			this.AutoCreateFolderCheckbox.CheckedChanged += new System.EventHandler(this.AutoCreateFolderCheckbox_CheckedChanged);
 			// 
 			// checkBox3
 			// 
 			this.checkBox3.AutoSize = true;
-			this.checkBox3.Location = new System.Drawing.Point(195, 106);
+			this.checkBox3.Location = new System.Drawing.Point(195, 147);
 			this.checkBox3.Name = "checkBox3";
 			this.checkBox3.Size = new System.Drawing.Size(183, 22);
 			this.checkBox3.TabIndex = 7;
@@ -284,63 +323,67 @@
 			// AutoFolderConfigB
 			// 
 			this.AutoFolderConfigB.Enabled = false;
-			this.AutoFolderConfigB.Location = new System.Drawing.Point(9, 46);
+			this.AutoFolderConfigB.Location = new System.Drawing.Point(9, 50);
 			this.AutoFolderConfigB.Name = "AutoFolderConfigB";
 			this.AutoFolderConfigB.Size = new System.Drawing.Size(106, 23);
 			this.AutoFolderConfigB.TabIndex = 6;
 			this.AutoFolderConfigB.Text = "自動作成の設定";
 			this.AutoFolderConfigB.UseVisualStyleBackColor = true;
 			// 
-			// AutoFolderPulldown
+			// AutoCreateFolderPulldown
 			// 
-			this.AutoFolderPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.AutoFolderPulldown.FormattingEnabled = true;
-			this.AutoFolderPulldown.Items.AddRange(new object[] {
+			this.AutoCreateFolderPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.AutoCreateFolderPulldown.Enabled = false;
+			this.AutoCreateFolderPulldown.FormattingEnabled = true;
+			this.AutoCreateFolderPulldown.Items.AddRange(new object[] {
             "(フォルダの自動作成をしない)",
             "最も新しいファイルの日付",
             "最も古いファイルの日付"});
-			this.AutoFolderPulldown.Location = new System.Drawing.Point(174, 74);
-			this.AutoFolderPulldown.Name = "AutoFolderPulldown";
-			this.AutoFolderPulldown.Size = new System.Drawing.Size(365, 26);
-			this.AutoFolderPulldown.TabIndex = 5;
+			this.AutoCreateFolderPulldown.Location = new System.Drawing.Point(174, 79);
+			this.AutoCreateFolderPulldown.Name = "AutoCreateFolderPulldown";
+			this.AutoCreateFolderPulldown.Size = new System.Drawing.Size(365, 26);
+			this.AutoCreateFolderPulldown.TabIndex = 5;
+			this.AutoCreateFolderPulldown.SelectionChangeCommitted += new System.EventHandler(this.AutoCreateFolderPulldown_SelectionChangeCommitted);
 			// 
 			// checkBox2
 			// 
 			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(6, 106);
+			this.checkBox2.Location = new System.Drawing.Point(6, 147);
 			this.checkBox2.Name = "checkBox2";
 			this.checkBox2.Size = new System.Drawing.Size(183, 22);
 			this.checkBox2.TabIndex = 3;
 			this.checkBox2.Text = "同名のファイルを上書きする";
 			this.checkBox2.UseVisualStyleBackColor = true;
 			// 
-			// FolderselPulldown
+			// DestFolderPulldown
 			// 
-			this.FolderselPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.FolderselPulldown.FormattingEnabled = true;
-			this.FolderselPulldown.Items.AddRange(new object[] {
+			this.DestFolderPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.DestFolderPulldown.Enabled = false;
+			this.DestFolderPulldown.FormattingEnabled = true;
+			this.DestFolderPulldown.Items.AddRange(new object[] {
             "(自動設定)",
             "「ピクチャ」フォルダ"});
-			this.FolderselPulldown.Location = new System.Drawing.Point(367, 45);
-			this.FolderselPulldown.Name = "FolderselPulldown";
-			this.FolderselPulldown.Size = new System.Drawing.Size(172, 26);
-			this.FolderselPulldown.TabIndex = 2;
+			this.DestFolderPulldown.Location = new System.Drawing.Point(367, 47);
+			this.DestFolderPulldown.Name = "DestFolderPulldown";
+			this.DestFolderPulldown.Size = new System.Drawing.Size(172, 26);
+			this.DestFolderPulldown.TabIndex = 2;
+			this.DestFolderPulldown.SelectionChangeCommitted += new System.EventHandler(this.DestFolderPulldown_SelectionChangeCommitted);
 			// 
-			// textBox2
+			// DestFolderTB
 			// 
-			this.textBox2.Location = new System.Drawing.Point(104, 16);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(435, 25);
-			this.textBox2.TabIndex = 1;
+			this.DestFolderTB.Location = new System.Drawing.Point(104, 16);
+			this.DestFolderTB.Name = "DestFolderTB";
+			this.DestFolderTB.Size = new System.Drawing.Size(380, 25);
+			this.DestFolderTB.TabIndex = 1;
 			// 
-			// DestfolderLabel
+			// DestFolderLabel
 			// 
-			this.DestfolderLabel.AutoSize = true;
-			this.DestfolderLabel.Location = new System.Drawing.Point(6, 21);
-			this.DestfolderLabel.Name = "DestfolderLabel";
-			this.DestfolderLabel.Size = new System.Drawing.Size(92, 18);
-			this.DestfolderLabel.TabIndex = 0;
-			this.DestfolderLabel.Text = "保存先フォルダ";
+			this.DestFolderLabel.AutoSize = true;
+			this.DestFolderLabel.Location = new System.Drawing.Point(6, 21);
+			this.DestFolderLabel.Name = "DestFolderLabel";
+			this.DestFolderLabel.Size = new System.Drawing.Size(92, 18);
+			this.DestFolderLabel.TabIndex = 0;
+			this.DestFolderLabel.Text = "保存先フォルダ";
 			// 
 			// MainFLP
 			// 
@@ -349,29 +392,33 @@
 			this.MainFLP.Controls.Add(this.FromBox);
 			this.MainFLP.Controls.Add(this.DestBox);
 			this.MainFLP.Controls.Add(this.groupBox2);
-			this.MainFLP.Dock = System.Windows.Forms.DockStyle.Top;
+			this.MainFLP.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.MainFLP.Location = new System.Drawing.Point(0, 24);
 			this.MainFLP.Name = "MainFLP";
-			this.MainFLP.Size = new System.Drawing.Size(563, 413);
+			this.MainFLP.Size = new System.Drawing.Size(582, 512);
 			this.MainFLP.TabIndex = 8;
 			// 
 			// StartButton
 			// 
 			this.StartButton.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.StartButton.Font = new System.Drawing.Font("メイリオ", 12F);
-			this.StartButton.Location = new System.Drawing.Point(0, 438);
+			this.StartButton.Location = new System.Drawing.Point(0, 536);
 			this.StartButton.Name = "StartButton";
-			this.StartButton.Size = new System.Drawing.Size(563, 46);
+			this.StartButton.Size = new System.Drawing.Size(582, 46);
 			this.StartButton.TabIndex = 8;
 			this.StartButton.Text = "開始";
 			this.StartButton.UseVisualStyleBackColor = true;
+			// 
+			// FromSelDialog
+			// 
+			this.FromSelDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
 			// 
 			// PicImporter
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-			this.ClientSize = new System.Drawing.Size(563, 484);
+			this.ClientSize = new System.Drawing.Size(582, 582);
 			this.Controls.Add(this.MainFLP);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.StartButton);
@@ -413,17 +460,22 @@
 		private System.Windows.Forms.Label DriveInfoLabel;
 		private System.Windows.Forms.GroupBox DestBox;
 		private System.Windows.Forms.Button AutoFolderConfigB;
-		private System.Windows.Forms.ComboBox AutoFolderPulldown;
+		private System.Windows.Forms.ComboBox AutoCreateFolderPulldown;
 		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.ComboBox FolderselPulldown;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.Label DestfolderLabel;
+		private System.Windows.Forms.ComboBox DestFolderPulldown;
+		private System.Windows.Forms.TextBox DestFolderTB;
+		private System.Windows.Forms.Label DestFolderLabel;
 		private System.Windows.Forms.CheckBox checkBox3;
 		private System.Windows.Forms.FlowLayoutPanel MainFLP;
 		private System.Windows.Forms.Label FolderSelLabel;
-		private System.Windows.Forms.CheckBox AutoFolderCheckbox;
+		private System.Windows.Forms.CheckBox AutoCreateFolderCheckbox;
 		private System.Windows.Forms.Button SearchDCIMButton;
 		private System.Windows.Forms.Button StartButton;
+		private System.Windows.Forms.Button FromSelBtn;
+		private System.Windows.Forms.FolderBrowserDialog FromSelDialog;
+		private System.Windows.Forms.Button DestSelBtn;
+		private System.Windows.Forms.FolderBrowserDialog DestSelDialog;
+		private System.Windows.Forms.Label AutoCreateFolder_PreviewLabel;
 	}
 }
 
