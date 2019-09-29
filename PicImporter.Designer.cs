@@ -44,7 +44,6 @@
 			this.comboBox2 = new System.Windows.Forms.ComboBox();
 			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
 			this.FilterCheckButton = new System.Windows.Forms.CheckBox();
-			this.label3 = new System.Windows.Forms.Label();
 			this.DestBox = new System.Windows.Forms.GroupBox();
 			this.AutoCreateFolder_PreviewLabel = new System.Windows.Forms.Label();
 			this.DestSelBtn = new System.Windows.Forms.Button();
@@ -61,6 +60,10 @@
 			this.StartButton = new System.Windows.Forms.Button();
 			this.FromSelDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.DestSelDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.checkBox4 = new System.Windows.Forms.CheckBox();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.FromBox.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.FilterPanel.SuspendLayout();
@@ -84,6 +87,7 @@
 			this.FromBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FromBox.AutoSize = true;
+			this.FromBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FromBox.Controls.Add(this.FromSelBtn);
 			this.FromBox.Controls.Add(this.SearchDCIMButton);
 			this.FromBox.Controls.Add(this.DriveInfoLabel);
@@ -95,14 +99,14 @@
 			this.FromBox.Location = new System.Drawing.Point(6, 6);
 			this.FromBox.Margin = new System.Windows.Forms.Padding(6);
 			this.FromBox.Name = "FromBox";
-			this.FromBox.Size = new System.Drawing.Size(510, 122);
+			this.FromBox.Size = new System.Drawing.Size(542, 122);
 			this.FromBox.TabIndex = 3;
 			this.FromBox.TabStop = false;
 			this.FromBox.Text = "取り込み元の設定";
 			// 
 			// FromSelBtn
 			// 
-			this.FromSelBtn.Location = new System.Drawing.Point(452, 74);
+			this.FromSelBtn.Location = new System.Drawing.Point(484, 72);
 			this.FromSelBtn.Name = "FromSelBtn";
 			this.FromSelBtn.Size = new System.Drawing.Size(52, 23);
 			this.FromSelBtn.TabIndex = 10;
@@ -112,9 +116,9 @@
 			// 
 			// SearchDCIMButton
 			// 
-			this.SearchDCIMButton.Location = new System.Drawing.Point(381, 43);
+			this.SearchDCIMButton.Location = new System.Drawing.Point(405, 43);
 			this.SearchDCIMButton.Name = "SearchDCIMButton";
-			this.SearchDCIMButton.Size = new System.Drawing.Size(123, 23);
+			this.SearchDCIMButton.Size = new System.Drawing.Size(131, 23);
 			this.SearchDCIMButton.TabIndex = 9;
 			this.SearchDCIMButton.Text = "DCIMフォルダ検索";
 			this.SearchDCIMButton.UseVisualStyleBackColor = true;
@@ -125,7 +129,7 @@
 			this.DriveInfoLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.DriveInfoLabel.Location = new System.Drawing.Point(3, 101);
 			this.DriveInfoLabel.Name = "DriveInfoLabel";
-			this.DriveInfoLabel.Size = new System.Drawing.Size(504, 18);
+			this.DriveInfoLabel.Size = new System.Drawing.Size(536, 18);
 			this.DriveInfoLabel.TabIndex = 8;
 			this.DriveInfoLabel.Text = "- ここに情報が表示されます -";
 			this.DriveInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -153,7 +157,7 @@
 			// 
 			this.SearchDrvButton.Location = new System.Drawing.Point(272, 43);
 			this.SearchDrvButton.Name = "SearchDrvButton";
-			this.SearchDrvButton.Size = new System.Drawing.Size(103, 23);
+			this.SearchDrvButton.Size = new System.Drawing.Size(127, 23);
 			this.SearchDrvButton.TabIndex = 5;
 			this.SearchDrvButton.Text = "ドライブ再検索";
 			this.SearchDrvButton.UseVisualStyleBackColor = true;
@@ -163,7 +167,7 @@
 			// 
 			this.FromFolderTB.Location = new System.Drawing.Point(128, 73);
 			this.FromFolderTB.Name = "FromFolderTB";
-			this.FromFolderTB.Size = new System.Drawing.Size(321, 25);
+			this.FromFolderTB.Size = new System.Drawing.Size(353, 25);
 			this.FromFolderTB.TabIndex = 4;
 			this.FromFolderTB.Text = "Path";
 			// 
@@ -178,31 +182,37 @@
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.AutoSize = true;
+			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.groupBox2.Controls.Add(this.FilterPanel);
 			this.groupBox2.Controls.Add(this.FilterCheckButton);
-			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Location = new System.Drawing.Point(3, 336);
+			this.groupBox2.Location = new System.Drawing.Point(3, 316);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(529, 115);
+			this.groupBox2.Size = new System.Drawing.Size(545, 194);
 			this.groupBox2.TabIndex = 6;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "フィルタ設定";
 			// 
 			// FilterPanel
 			// 
+			this.FilterPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FilterPanel.Controls.Add(this.comboBox1);
+			this.FilterPanel.Controls.Add(this.textBox1);
+			this.FilterPanel.Controls.Add(this.checkBox4);
+			this.FilterPanel.Controls.Add(this.checkBox1);
 			this.FilterPanel.Controls.Add(this.dateTimePicker1);
 			this.FilterPanel.Controls.Add(this.comboBox2);
 			this.FilterPanel.Controls.Add(this.dateTimePicker2);
-			this.FilterPanel.Location = new System.Drawing.Point(9, 45);
+			this.FilterPanel.Location = new System.Drawing.Point(9, 52);
 			this.FilterPanel.Name = "FilterPanel";
-			this.FilterPanel.Size = new System.Drawing.Size(514, 46);
+			this.FilterPanel.Size = new System.Drawing.Size(514, 126);
 			this.FilterPanel.TabIndex = 8;
 			this.FilterPanel.Visible = false;
 			// 
 			// dateTimePicker1
 			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(10, 3);
+			this.dateTimePicker1.Location = new System.Drawing.Point(6, 28);
 			this.dateTimePicker1.Name = "dateTimePicker1";
 			this.dateTimePicker1.Size = new System.Drawing.Size(144, 25);
 			this.dateTimePicker1.TabIndex = 0;
@@ -217,22 +227,23 @@
             "以外",
             "から ... まで",
             "から ... まで 以外"});
-			this.comboBox2.Location = new System.Drawing.Point(160, 2);
+			this.comboBox2.Location = new System.Drawing.Point(156, 27);
 			this.comboBox2.Name = "comboBox2";
 			this.comboBox2.Size = new System.Drawing.Size(97, 26);
 			this.comboBox2.TabIndex = 3;
 			// 
 			// dateTimePicker2
 			// 
-			this.dateTimePicker2.Location = new System.Drawing.Point(263, 3);
+			this.dateTimePicker2.Location = new System.Drawing.Point(259, 27);
 			this.dateTimePicker2.Name = "dateTimePicker2";
 			this.dateTimePicker2.Size = new System.Drawing.Size(156, 25);
 			this.dateTimePicker2.TabIndex = 1;
 			// 
 			// FilterCheckButton
 			// 
+			this.FilterCheckButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.FilterCheckButton.AutoSize = true;
-			this.FilterCheckButton.Location = new System.Drawing.Point(387, 17);
+			this.FilterCheckButton.Location = new System.Drawing.Point(9, 24);
 			this.FilterCheckButton.Name = "FilterCheckButton";
 			this.FilterCheckButton.Size = new System.Drawing.Size(123, 22);
 			this.FilterCheckButton.TabIndex = 7;
@@ -240,18 +251,10 @@
 			this.FilterCheckButton.UseVisualStyleBackColor = true;
 			this.FilterCheckButton.CheckedChanged += new System.EventHandler(this.FilterCheckButton_CheckedChanged);
 			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 21);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(140, 18);
-			this.label3.TabIndex = 4;
-			this.label3.Text = "日付・サイズで絞り込む";
-			// 
 			// DestBox
 			// 
 			this.DestBox.AutoSize = true;
+			this.DestBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.DestBox.Controls.Add(this.AutoCreateFolder_PreviewLabel);
 			this.DestBox.Controls.Add(this.DestSelBtn);
 			this.DestBox.Controls.Add(this.FolderSelLabel);
@@ -263,9 +266,10 @@
 			this.DestBox.Controls.Add(this.DestFolderPulldown);
 			this.DestBox.Controls.Add(this.DestFolderTB);
 			this.DestBox.Controls.Add(this.DestFolderLabel);
+			this.DestBox.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.DestBox.Location = new System.Drawing.Point(3, 137);
 			this.DestBox.Name = "DestBox";
-			this.DestBox.Size = new System.Drawing.Size(545, 193);
+			this.DestBox.Size = new System.Drawing.Size(545, 173);
 			this.DestBox.TabIndex = 7;
 			this.DestBox.TabStop = false;
 			this.DestBox.Text = "保存先の設定";
@@ -274,7 +278,7 @@
 			// 
 			this.AutoCreateFolder_PreviewLabel.AutoSize = true;
 			this.AutoCreateFolder_PreviewLabel.Enabled = false;
-			this.AutoCreateFolder_PreviewLabel.Location = new System.Drawing.Point(9, 115);
+			this.AutoCreateFolder_PreviewLabel.Location = new System.Drawing.Point(9, 106);
 			this.AutoCreateFolder_PreviewLabel.Name = "AutoCreateFolder_PreviewLabel";
 			this.AutoCreateFolder_PreviewLabel.Size = new System.Drawing.Size(92, 18);
 			this.AutoCreateFolder_PreviewLabel.TabIndex = 11;
@@ -283,6 +287,7 @@
 			// 
 			// DestSelBtn
 			// 
+			this.DestSelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.DestSelBtn.Location = new System.Drawing.Point(490, 17);
 			this.DestSelBtn.Name = "DestSelBtn";
 			this.DestSelBtn.Size = new System.Drawing.Size(49, 23);
@@ -314,7 +319,7 @@
 			// checkBox3
 			// 
 			this.checkBox3.AutoSize = true;
-			this.checkBox3.Location = new System.Drawing.Point(195, 147);
+			this.checkBox3.Location = new System.Drawing.Point(198, 127);
 			this.checkBox3.Name = "checkBox3";
 			this.checkBox3.Size = new System.Drawing.Size(183, 22);
 			this.checkBox3.TabIndex = 7;
@@ -349,7 +354,7 @@
 			// checkBox2
 			// 
 			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(6, 147);
+			this.checkBox2.Location = new System.Drawing.Point(9, 127);
 			this.checkBox2.Name = "checkBox2";
 			this.checkBox2.Size = new System.Drawing.Size(183, 22);
 			this.checkBox2.TabIndex = 3;
@@ -390,22 +395,23 @@
 			// 
 			this.MainFLP.AutoScroll = true;
 			this.MainFLP.AutoSize = true;
+			this.MainFLP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.MainFLP.Controls.Add(this.FromBox);
 			this.MainFLP.Controls.Add(this.DestBox);
 			this.MainFLP.Controls.Add(this.groupBox2);
 			this.MainFLP.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.MainFLP.Location = new System.Drawing.Point(0, 24);
 			this.MainFLP.Name = "MainFLP";
-			this.MainFLP.Size = new System.Drawing.Size(582, 512);
+			this.MainFLP.Size = new System.Drawing.Size(558, 464);
 			this.MainFLP.TabIndex = 8;
 			// 
 			// StartButton
 			// 
 			this.StartButton.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.StartButton.Font = new System.Drawing.Font("メイリオ", 12F);
-			this.StartButton.Location = new System.Drawing.Point(0, 536);
+			this.StartButton.Location = new System.Drawing.Point(0, 488);
 			this.StartButton.Name = "StartButton";
-			this.StartButton.Size = new System.Drawing.Size(582, 46);
+			this.StartButton.Size = new System.Drawing.Size(558, 46);
 			this.StartButton.TabIndex = 8;
 			this.StartButton.Text = "開始";
 			this.StartButton.UseVisualStyleBackColor = true;
@@ -414,12 +420,48 @@
 			// 
 			this.FromSelDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
 			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(6, 3);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(159, 22);
+			this.checkBox1.TabIndex = 5;
+			this.checkBox1.Text = "日付・サイズで絞り込む";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			// 
+			// checkBox4
+			// 
+			this.checkBox4.AutoSize = true;
+			this.checkBox4.Location = new System.Drawing.Point(6, 59);
+			this.checkBox4.Name = "checkBox4";
+			this.checkBox4.Size = new System.Drawing.Size(171, 22);
+			this.checkBox4.TabIndex = 6;
+			this.checkBox4.Text = "含まれる文字列で絞り込む";
+			this.checkBox4.UseVisualStyleBackColor = true;
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(6, 79);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(356, 25);
+			this.textBox1.TabIndex = 7;
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(368, 78);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(121, 26);
+			this.comboBox1.TabIndex = 12;
+			// 
 			// PicImporter
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-			this.ClientSize = new System.Drawing.Size(582, 582);
+			this.ClientSize = new System.Drawing.Size(558, 534);
 			this.Controls.Add(this.MainFLP);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.StartButton);
@@ -433,6 +475,7 @@
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
 			this.FilterPanel.ResumeLayout(false);
+			this.FilterPanel.PerformLayout();
 			this.DestBox.ResumeLayout(false);
 			this.DestBox.PerformLayout();
 			this.MainFLP.ResumeLayout(false);
@@ -455,7 +498,6 @@
 		private System.Windows.Forms.ComboBox FromDriveSel;
 		private System.Windows.Forms.Panel FilterPanel;
 		private System.Windows.Forms.CheckBox FilterCheckButton;
-		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.Label FromFolderLabel;
 		private System.Windows.Forms.Label DriveInfoLabel;
@@ -477,6 +519,10 @@
 		private System.Windows.Forms.Button DestSelBtn;
 		private System.Windows.Forms.FolderBrowserDialog DestSelDialog;
 		private System.Windows.Forms.Label AutoCreateFolder_PreviewLabel;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.CheckBox checkBox4;
+		private System.Windows.Forms.CheckBox checkBox1;
 	}
 }
 

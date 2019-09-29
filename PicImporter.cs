@@ -75,6 +75,9 @@ namespace PicImporter {
 			}
 		}
 
+		/// <summary>
+		/// 「保存先の設定」->「フォルダ指定」の初期化。
+		/// </summary>
 		private void InitDestFolderPullDown() {
 			DestFolderPulldown.Items.Clear();
 			//「ピクチャ」フォルダ。
@@ -125,6 +128,11 @@ namespace PicImporter {
 			return Result;
 		}
 
+		/// <summary>
+		/// 「ドライブ再検索」のボタンの処理。
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchDrvButton_Click(object sender, EventArgs e) {
 			DriveInfoLabel.Text = "再読み込み中...";
 			FromFolderTB.Text = "";
@@ -134,6 +142,11 @@ namespace PicImporter {
 			DriveInfoLabel.Text = "";
 		}
 
+		/// <summary>
+		/// 「DCIMフォルダ検索」のボタンの処理。
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchDCIMButton_Click(object sender, EventArgs e) {
 			if (FromDriveSel.SelectedIndex == -1) {
 				MessageBox.Show("取り込み元のドライブを選んでください。", "DCIMフォルダ検索 - エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -225,7 +238,7 @@ namespace PicImporter {
 			if (Path != null) {
 				AutoCreateFolder_PreviewLabel.Visible = true;
 				AutoCreateFolder_PreviewLabel.Enabled = true;
-				AutoCreateFolder_PreviewLabel.Text = Path;
+				AutoCreateFolder_PreviewLabel.Text = "フォルダ名:"+Path;
 			} else {
 				AutoCreateFolder_PreviewLabel.Visible = true;
 				AutoCreateFolder_PreviewLabel.Enabled = true;
@@ -338,8 +351,17 @@ namespace PicImporter {
 			AutoCreateFolderPulldown.Enabled = AutoCreateFolderCheckbox.Checked;
 		}
 
+		/// <summary>
+		/// 保存先の設定の「参照」のボタンの処理。
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void DestSelBtn_Click(object sender, EventArgs e) {
-			DestSelDialog.ShowDialog();
+			if (DestSelDialog.ShowDialog() == DialogResult.OK) {
+				DestFolderTB.Text = DestSelDialog.SelectedPath;
+			}
 		}
+
+
 	}
 }
